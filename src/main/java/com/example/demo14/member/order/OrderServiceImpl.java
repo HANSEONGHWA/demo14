@@ -1,12 +1,12 @@
-package com.example.demo14.order;
+package com.example.demo14.member.order;
 
 import com.example.demo14.discount.DiscountPolicy;
-import com.example.demo14.discount.FixDiscountPolicy;
-import com.example.demo14.discount.RateDiscountPolicy;
 import com.example.demo14.member.Member;
 import com.example.demo14.member.MemberRepository;
-import com.example.demo14.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -19,6 +19,7 @@ public class OrderServiceImpl implements OrderService{
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;

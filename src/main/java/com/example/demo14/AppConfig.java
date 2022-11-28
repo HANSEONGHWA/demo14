@@ -2,14 +2,13 @@ package com.example.demo14;
 
 
 import com.example.demo14.discount.DiscountPolicy;
-import com.example.demo14.discount.FixDiscountPolicy;
 import com.example.demo14.discount.RateDiscountPolicy;
 import com.example.demo14.member.MemberRepository;
 import com.example.demo14.member.MemberService;
 import com.example.demo14.member.MemberServiceImpl;
 import com.example.demo14.member.MemoryMemberRepository;
-import com.example.demo14.order.OrderService;
-import com.example.demo14.order.OrderServiceImpl;
+import com.example.demo14.member.order.OrderService;
+import com.example.demo14.member.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

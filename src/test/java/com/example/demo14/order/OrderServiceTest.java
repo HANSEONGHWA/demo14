@@ -1,13 +1,11 @@
-package com.example.demo14.Order;
+package com.example.demo14.order;
 
 import com.example.demo14.AppConfig;
 import com.example.demo14.member.Grade;
 import com.example.demo14.member.Member;
 import com.example.demo14.member.MemberService;
-import com.example.demo14.member.MemberServiceImpl;
-import com.example.demo14.order.Order;
-import com.example.demo14.order.OrderService;
-import com.example.demo14.order.OrderServiceImpl;
+import com.example.demo14.member.order.Order;
+import com.example.demo14.member.order.OrderService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
