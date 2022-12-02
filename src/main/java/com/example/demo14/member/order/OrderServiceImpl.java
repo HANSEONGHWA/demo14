@@ -16,9 +16,23 @@ public class OrderServiceImpl implements OrderService{
 //    private final DiscountPolicy discountPolicy2 = new RateDiscountPolicy();
 
     //인터페이스에만 의존.
+    //final 키워드 , 생성자 주입을 사용하면  필드에 final사용 가능.. 생성자에서 값이 설정되지 않는 오류를 컴파일 시점에서 막아줌.
+    //컴파일 오류 : 필수 필드인 discountPolicy 값을 설정해야하는데 누락됐을 경우.
+    //  java: variable discountPolicy might not have been initialized. 발생.
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+// 수정자 주입방식(set)
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
+//    @Autowired
+//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+//        this.discountPolicy = discountPolicy;
+//    }
+
+    //생성자 의존관계 주입
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
