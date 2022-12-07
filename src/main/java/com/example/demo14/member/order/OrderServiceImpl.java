@@ -3,11 +3,16 @@ package com.example.demo14.member.order;
 import com.example.demo14.discount.DiscountPolicy;
 import com.example.demo14.member.Member;
 import com.example.demo14.member.MemberRepository;
+import com.example.demo14.member.order.Order;
+import com.example.demo14.member.order.OrderService;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
 
@@ -32,11 +37,15 @@ public class OrderServiceImpl implements OrderService{
 //        this.discountPolicy = discountPolicy;
 //    }
 
-    //생성자 의존관계 주입
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    private DiscountPolicy rateDiscountPolicy;
+
+    //생성자 의존관계 주입
+    // 같은 타입의 값이 여러 개일 경우 파라미터로 설정.
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository,  DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
+        this.discountPolicy = rateDiscountPolicy;
     }
 
     @Override
