@@ -9,7 +9,7 @@
 
     <bean id="memberRepository" class="com.example.demo14.member.MemoryMemberRepository"/>
 
-    <bean id="orderService" class="com.example.demo14.member.order.OrderServiceImpl">
+    <bean id="orderService" class="com.example.demo14.order.OrderServiceImpl">
         <constructor-arg name="memberRepository" ref="memberRepository"/>
         <constructor-arg name="rateDiscountPolicy" ref="discountPolicy"/>
     </bean>

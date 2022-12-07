@@ -4,8 +4,6 @@ import com.example.demo14.discount.FixDiscountPolicy;
 import com.example.demo14.member.Grade;
 import com.example.demo14.member.Member;
 import com.example.demo14.member.MemoryMemberRepository;
-import com.example.demo14.member.order.Order;
-import com.example.demo14.member.order.OrderServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

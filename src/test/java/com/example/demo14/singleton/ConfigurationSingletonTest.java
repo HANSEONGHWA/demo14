@@ -3,7 +3,7 @@ package com.example.demo14.singleton;
 import com.example.demo14.AppConfig;
 import com.example.demo14.member.MemberRepository;
 import com.example.demo14.member.MemberServiceImpl;
-import com.example.demo14.member.order.OrderServiceImpl;
+import com.example.demo14.order.OrderServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;

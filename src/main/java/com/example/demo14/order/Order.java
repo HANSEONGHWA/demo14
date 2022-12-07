@@ -1,4 +1,4 @@
-package com.example.demo14.member.order;
+package com.example.demo14.order;
 
 public class Order {
 

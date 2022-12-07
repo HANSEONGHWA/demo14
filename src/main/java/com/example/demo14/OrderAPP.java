@@ -3,8 +3,8 @@ package com.example.demo14;
 import com.example.demo14.member.Grade;
 import com.example.demo14.member.Member;
 import com.example.demo14.member.MemberService;
-import com.example.demo14.member.order.Order;
-import com.example.demo14.member.order.OrderService;
+import com.example.demo14.order.Order;
+import com.example.demo14.order.OrderService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

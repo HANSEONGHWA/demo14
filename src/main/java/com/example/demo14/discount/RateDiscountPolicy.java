@@ -1,5 +1,6 @@
 package com.example.demo14.discount;
 
+import com.example.demo14.annotation.MainDiscountPolicy;
 import com.example.demo14.member.Grade;
 import com.example.demo14.member.Member;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,9 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 //@Qualifier("mainDiscountPolicy")
 
-
-@Primary
 //최상위 의존관계 주입
+//@Primary
+
+@MainDiscountPolicy
 public class RateDiscountPolicy implements DiscountPolicy{
 
     private int discountPercent = 10;
