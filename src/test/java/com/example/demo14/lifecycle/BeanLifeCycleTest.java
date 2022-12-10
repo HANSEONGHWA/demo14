@@ -23,8 +23,16 @@ public class BeanLifeCycleTest {
 
     @Configuration
     static class LifeCycleConfig {
-        @Bean
-        public NetworkClient networkClient(){
+
+//        @Bean/*1번*/
+//        public NetworkClient networkClient(){
+//            NetworkClient networkClient = new NetworkClient();
+//            networkClient.setUrl("http://hello-spring.dev");
+//            return networkClient;
+//        }
+
+        @Bean(initMethod = "init", destroyMethod = "close") /*2번*/
+        public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://hello-spring.dev");
             return networkClient;
