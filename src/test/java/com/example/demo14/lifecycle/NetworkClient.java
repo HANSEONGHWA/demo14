@@ -5,6 +5,8 @@ package com.example.demo14.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.security.auth.Destroyable;
 
 //가상의 클라이언트
@@ -64,13 +66,20 @@ public class NetworkClient /*implements InitializingBean, DisposableBean*/ {
 
     //설정정보 사용 특징
     //1.메서드 이름 자유롭게 부여 가능, 2.스프링 빈, 스프링 코드에 의존하지 않음. 3.설정정보를 사용하기 때문에 코드를 고칠 수 없는 외부 라이브러리에서 적용할 수 없음.
+    @PostConstruct
     public void init(){
         System.out.println("NetworkClient.afterPropertiesSet");
         connect();
         call("초기화 연결 메세지");
     }
+    @PreDestroy
     public void close(){
         System.out.println("NetworkClient.destroy");
         disconnect();
     }
+   // 3. 빈 생명주기 콜백 지원 (애노테이션 @PostConstruct, @PreDestory )
+    //최신 스프링에서 권장하는 방법.
+    //자바 표준 기술이라 다른 컨테이너에서도 동작.
+    //외부라이브러리에는 적용 불가.
+
 }
