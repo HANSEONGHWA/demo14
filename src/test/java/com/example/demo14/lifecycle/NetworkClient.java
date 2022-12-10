@@ -2,8 +2,13 @@ package com.example.demo14.lifecycle;
 //*빈 생명주기 콜백
 //스프링빈 생성 및 소멸되기 직전에 호출해주는 메서드
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
+import javax.security.auth.Destroyable;
+
 //가상의 클라이언트
-public class NetworkClient {
+public class NetworkClient implements InitializingBean, DisposableBean {
 
     // 접속해야하는 서버의 url
     private String url;
@@ -29,7 +34,29 @@ public class NetworkClient {
 
     //서비스 종료시 호출
     public void disconnect() {
-        System.out.println("disconnect = " + url);
+        System.out.println("close = " + url);
     }
 
+    //1.빈 생명주기 콜백 지원 (인터페이스 InitializingBean, DisposableBean)
+    //InitializingBean 초기화 빈
+    //프로퍼티 셋팅이 끝나면 (의존관계주입이 끝나면) 호출됨.
+
+    //초기화, 소멸 인터페이스 단점..
+    //1.스프링 전용 인터페이스에 의존, 2.초기화, 소멸 메서드의 이름을 변경할 수 없음. 3.내가 코드를 고칠 수 없는 외부 라이브러리에 적용할 수 없음.
+    //잘 사용하지 않음.
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("NetworkClient.afterPropertiesSet");
+        connect();
+        call("초기화 연결 메세지");
+    }
+
+    //DisposableBean
+    //빈 종료 시 호출 됨.
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("NetworkClient.destroy");
+        disconnect();
+
+    }
 }
