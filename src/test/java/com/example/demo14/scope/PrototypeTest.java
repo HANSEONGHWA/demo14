@@ -24,12 +24,12 @@ public class PrototypeTest {
 
     @Test
     void prototypeBeanFind() {
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(prototypeBean.class);
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PrototypeBean.class);
 
         System.out.println("find prototypeBean1");
-        prototypeBean prototypeBean1 = ac.getBean(prototypeBean.class);
+        PrototypeBean prototypeBean1 = ac.getBean(PrototypeBean.class);
         System.out.println("find prototypeBean2");
-        prototypeBean prototypeBean2 = ac.getBean(prototypeBean.class);
+        PrototypeBean prototypeBean2 = ac.getBean(PrototypeBean.class);
         System.out.println("prototypeBean1 = " + prototypeBean1);
         System.out.println("prototypeBean2 = " + prototypeBean2);
 
@@ -42,7 +42,7 @@ public class PrototypeTest {
     }
 
     @Scope("prototype")
-    static class prototypeBean {
+    static class PrototypeBean {
 
         @PostConstruct
         public void init() {
