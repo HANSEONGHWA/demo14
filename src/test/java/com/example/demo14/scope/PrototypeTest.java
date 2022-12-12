@@ -35,6 +35,9 @@ public class PrototypeTest {
 
         assertThat(prototypeBean1).isNotSameAs(prototypeBean2);
 
+        //destroy를 호출해야한다면 직접호출해줘야함.
+        prototypeBean1.destroy();
+        prototypeBean2.destroy();
         ac.close();
     }
 
