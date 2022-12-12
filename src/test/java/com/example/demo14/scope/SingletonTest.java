@@ -20,10 +20,10 @@ public class SingletonTest {
 
     @Test
     void singletonBeanFind() {
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(singletonBean.class);
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SingletonBean.class);
 
-        singletonBean singletonBean1 = ac.getBean(singletonBean.class);
-        singletonBean singletonBean2 = ac.getBean(singletonBean.class);
+        SingletonBean singletonBean1 = ac.getBean(SingletonBean.class);
+        SingletonBean singletonBean2 = ac.getBean(SingletonBean.class);
         System.out.println("singletonBean1 = " + singletonBean1);
         System.out.println("singletonBean2 = " + singletonBean2);
         Assertions.assertThat(singletonBean1).isSameAs(singletonBean2);
@@ -31,7 +31,7 @@ public class SingletonTest {
         ac.close();
     }
     @Scope("singleton")
-    static class singletonBean {
+    static class SingletonBean {
         @PostConstruct
         public void init() {
             System.out.println("singleton.init");
