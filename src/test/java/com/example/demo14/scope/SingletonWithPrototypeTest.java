@@ -2,6 +2,8 @@ package com.example.demo14.scope;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -43,39 +45,56 @@ public class SingletonWithPrototypeTest {
 
     @Scope("singleton")
     static class ClientBean {
-        private final PrototypeBean prototypeBean; //생성시점에 주입. X 01
+        //ObjectProvider 지정한 빈을 컨테이너에서 대신 찾아주는 DL서비스.
+        //prototypeBeanProvider.getObject() 를 통해 항상 새로운 빈이 생성돠는 것을 확인할 수 있음.
+        //ObjectProvider의 getObject()를 호출하면 내부에서는 스프링 컨테이너를 통해 해당 빈을 찾아서 반환.(DL)
+        @Autowired
+        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+
+        public int logic(){
+            PrototypeBean prototypeBean = getObject();
+            prototypeBean.addCount();
+            int count = prototypeBean.getCount();
+            return count;
+        }
+
+        private PrototypeBean getObject() {
+            return prototypeBeanProvider.getObject();
+        }
+
+//        private final PrototypeBean prototypeBean; //생성시점에 주입. X 01
 
 //        @Autowired
 //        ApplicationContext applicationContext;
 
-        @Autowired
-        ClientBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
+//        @Autowired
+//        ClientBean(PrototypeBean prototypeBean) {
+//            this.prototypeBean = prototypeBean;
+//        }
 
-        public int logic(){
-//            PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class); // 주입시점 마다 생성.(하길 원함.)
-            prototypeBean.addCount();
-            int count = prototypeBean.getCount();
-            return count;
-        }
+//        public int logic(){
+////            PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class); // 주입시점 마다 생성.(하길 원함.)
+//            prototypeBean.addCount();
+//            int count = prototypeBean.getCount();
+//            return count;
+//        }
     }
 
-    @Scope("singleton")
-    static class ClientBean2 {
-        private final PrototypeBean prototypeBean; //생성시점에 주입. X 02 >> prototype 이 각각 생성되지만 사용할 때마다 계속 생성되지 않음.
-
-        @Autowired
-        ClientBean2(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
-
-        public int logic() {
-            prototypeBean.addCount();
-            int count = prototypeBean.getCount();
-            return count;
-        }
-    }
+//    @Scope("singleton")
+//    static class ClientBean2 {
+//        private final PrototypeBean prototypeBean; //생성시점에 주입. X 02 >> prototype 이 각각 생성되지만 사용할 때마다 계속 생성되지 않음.
+//
+//        @Autowired
+//        ClientBean2(PrototypeBean prototypeBean) {
+//            this.prototypeBean = prototypeBean;
+//        }
+//
+//        public int logic() {
+//            prototypeBean.addCount();
+//            int count = prototypeBean.getCount();
+//            return count;
+//        }
+//    }
 
 
     @Scope("prototype")
