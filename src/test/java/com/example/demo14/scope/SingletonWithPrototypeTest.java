@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 //*프로토타입 스코프 - 싱글톤 빈과 함께 사용시 문제점.
 
@@ -40,7 +41,7 @@ public class SingletonWithPrototypeTest {
 
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        Assertions.assertThat(count2).isEqualTo(2);
+        Assertions.assertThat(count2).isEqualTo(1);
     }
 
     @Scope("singleton")
@@ -49,17 +50,17 @@ public class SingletonWithPrototypeTest {
         //prototypeBeanProvider.getObject() 를 통해 항상 새로운 빈이 생성돠는 것을 확인할 수 있음.
         //ObjectProvider의 getObject()를 호출하면 내부에서는 스프링 컨테이너를 통해 해당 빈을 찾아서 반환.(DL)
         @Autowired
-        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+//        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+
+        //JSR-330 Provider 사용(자바 표준기술)/
+        private Provider<PrototypeBean> prototypeBeanProvider;
 
         public int logic(){
-            PrototypeBean prototypeBean = getObject();
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
+
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
-        }
-
-        private PrototypeBean getObject() {
-            return prototypeBeanProvider.getObject();
         }
 
 //        private final PrototypeBean prototypeBean; //생성시점에 주입. X 01
